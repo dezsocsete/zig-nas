@@ -2,13 +2,13 @@ const std = @import("std");
 const utils = @import("utils/core_utils.zig");
 const strUtil = @import("utils/string_util.zig");
 
-const inputPath = "C:\\git\\zig-folder\\input";
-const destinationFolder = "C:\\git\\zig-folder\\output";
+const input_path = "C:\\git\\zig-folder\\input";
+const destination_folder = "C:\\git\\zig-folder\\output";
 
 pub fn main() !void {
-    try utils.deleteFolder(destinationFolder);
-    try std.fs.makeDirAbsolute(destinationFolder);
-    try recursiveCopy(inputPath, destinationFolder);
+    try utils.deleteFolder(destination_folder);
+    try std.fs.makeDirAbsolute(destination_folder);
+    try recursiveCopy(input_path, destination_folder);
 }
 
 pub fn recursiveCopy(sourcePath: []const u8, destinationPath: []const u8) anyerror!void {
@@ -23,7 +23,7 @@ pub fn recursiveCopy(sourcePath: []const u8, destinationPath: []const u8) anyerr
         const entry = next.?;
         try handleEntry(entry, sourcePath, destinationPath);
     }
-    const isInitialFolder = std.mem.eql(u8, sourcePath, inputPath);
+    const isInitialFolder = std.mem.eql(u8, sourcePath, input_path);
     folder.close();
     if (!isInitialFolder) {
         try utils.deleteFolder(sourcePath);
